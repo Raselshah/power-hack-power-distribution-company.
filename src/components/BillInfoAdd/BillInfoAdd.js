@@ -7,12 +7,30 @@ const BillInfoAdd = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    fetch("http://localhost:5000/add-billing", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json)
+      .then((result) => console.log("success"));
+    console.log(data);
+  };
+
   return (
     <div>
       <input type="checkbox" id="my-modal-6" class="modal-toggle" />
       <div class="modal modal-bottom sm:modal-middle">
         <div class="modal-box">
+          <label
+            htmlFor="my-modal-6"
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+          >
+            ✕
+          </label>
           <h2>Type your Bill information</h2>
           <form
             className="flex flex-col justify-center items-center gap-2 mt-3"
@@ -54,13 +72,12 @@ const BillInfoAdd = () => {
               {...register("amount", { required: true })}
             />
             {errors.amount && "please enter your amount"}
-            <input class="btn btn-xs" type="submit" />
+            <input
+              className="btn btn-primary w-full max-w-xs"
+              type="submit"
+              value="Submit"
+            />
           </form>
-          <div class="modal-action">
-            <label for="my-modal-6" class="btn">
-              Yay!
-            </label>
-          </div>
         </div>
       </div>
     </div>
