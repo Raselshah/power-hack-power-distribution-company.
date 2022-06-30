@@ -1,12 +1,27 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-const ModalForm = ({ onSubmit }) => {
+const ModalForm = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
+
+  const onSubmit = (data, event) => {
+    fetch("http://localhost:5000/add-billing", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log("success");
+      });
+    event.target.reset();
+  };
 
   return (
     <div>

@@ -1,29 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import ModalForm from "../../Hooks/ModalForm/ModalForm";
+import BillInfo from "../BillInfo/BillInfo";
 
 const SearchField = () => {
-  const onSubmit = (data, event) => {
-    fetch("http://localhost:5000/add-billing", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json)
-      .then((result) => {
-        console.log("success");
-      });
-    event.target.reset();
-  };
+  const [searchField, setSearchField] = useState("");
+  // const onSubmit = (data, event) => {
+  //   fetch("http://localhost:5000/add-billing", {
+  //     method: "POST",
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //     body: JSON.stringify(data),
+  //   })
+  //     .then((res) => res.json)
+  //     .then((result) => {
+  //       console.log("success");
+  //     });
+  //   event.target.reset();
+  // };
 
   const handleSearch = () => {
     const searchText = document.getElementById("search").value;
-    console.log(searchText);
+    setSearchField(searchText);
   };
+  console.log(searchField);
   return (
     <>
-      <ModalForm onSubmit={onSubmit} />
       <div class="navbar bg-gray-400 mt-12 w-3/4 mx-auto rounded-sm">
         <div class="flex-none">
           <h2 class="">Billings</h2>
@@ -58,11 +60,7 @@ const SearchField = () => {
           </div>
         </div>
         <div class="flex-none">
-          <label
-            onClick={onSubmit}
-            for="my-modal-6"
-            class="btn btn-sm modal-button"
-          >
+          <label for="my-modal-6" class="btn btn-sm modal-button">
             Add New Bill
           </label>
         </div>

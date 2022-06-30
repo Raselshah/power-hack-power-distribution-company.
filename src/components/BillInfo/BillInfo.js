@@ -3,9 +3,8 @@ import { MdOutlineUpdate } from "react-icons/md";
 import { TiDeleteOutline } from "react-icons/ti";
 import { useQuery } from "react-query";
 import Loading from "../../Hooks/Loading/Loading";
-import ModalForm from "../../Hooks/ModalForm/ModalForm";
 
-const BillInfo = () => {
+const BillInfo = ({ text }) => {
   const {
     isLoading,
     error,
@@ -17,36 +16,40 @@ const BillInfo = () => {
 
   if (isLoading) return <Loading />;
 
-  const onSubmit = (id, data, event) => {
-    fetch(`http://localhost:5000/update-billing/${id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json)
-      .then((result) => {
-        console.log("success put");
-      });
-    event.target.reset();
-  };
+  // const onSubmit = (id, data, event) => {
+  //   fetch(`http://localhost:5000/update-billing/${id}`, {
+  //     method: "PUT",
+  //     headers: {
+  //       "content-type": "application/json",
+  //       authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+  //     },
+  //     body: JSON.stringify(data),
+  //   })
+  //     .then((res) => res.json)
+  //     .then((result) => {
+  //       console.log("success put");
+  //     });
+  //   event.target.reset();
+  // };
 
   const handleDelete = (id) => {
     const url = `http://localhost:5000/delete-billing/${id}`;
     fetch(url, {
       method: "DELETE",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log("delete succsessfull");
+        console.log("delete successfull");
       });
   };
   refetch();
 
   return (
     <>
-      <ModalForm onSubmit={onSubmit} />
+      {/* <ModalForm onSubmit={onSubmit} /> */}
       <div class="overflow-x-auto mt-6 w-3/4 mx-auto">
         <table class="table w-full">
           <thead>
@@ -72,7 +75,6 @@ const BillInfo = () => {
                     <div className="flex gap-x-2">
                       <label
                         for="my-modal-6"
-                        onClick={() => onSubmit(bill._id)}
                         title="update"
                         className="text-xl hover:text-green-500 cursor-pointer"
                       >
