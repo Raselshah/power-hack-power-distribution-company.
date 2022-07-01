@@ -7,7 +7,7 @@ const Header = () => {
   const [user, setUser] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/user")
+    fetch("https://red-smarties-17325.herokuapp.com/user")
       .then((res) => res.json())
       .then((result) => setUser(result));
   }, []);
@@ -17,7 +17,9 @@ const Header = () => {
     error,
     data: allBill,
   } = useQuery("bill", () =>
-    fetch("http://localhost:5000/billing-list").then((res) => res.json())
+    fetch("https://red-smarties-17325.herokuapp.com/billing-list").then((res) =>
+      res.json()
+    )
   );
   if (isLoading) return <Loading />;
   let newAmount = 0;

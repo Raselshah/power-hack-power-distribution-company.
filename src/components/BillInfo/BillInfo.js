@@ -7,10 +7,11 @@ import Loading from "../../Hooks/Loading/Loading";
 const BillInfo = ({ text }) => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
+  const [progress, setProgress] = useState(false);
   const size = 10;
 
   useEffect(() => {
-    fetch("http://localhost:5000/bill")
+    fetch("https://red-smarties-17325.herokuapp.com/bill")
       .then((res) => res.json())
       .then((result) => {
         const count = result.bills;
@@ -24,15 +25,15 @@ const BillInfo = ({ text }) => {
     data: allBill,
     refetch,
   } = useQuery("bill", () =>
-    fetch(`http://localhost:5000/billing-list?page=${page}&count=${size}`).then(
-      (res) => res.json()
-    )
+    fetch(
+      `https://red-smarties-17325.herokuapp.com/billing-list?page=${page}&count=${size}`
+    ).then((res) => res.json())
   );
 
   if (isLoading) return <Loading />;
 
   // const onSubmit = (id, data, event) => {
-  //   fetch(`http://localhost:5000/update-billing/${id}`, {
+  //   fetch(`https://red-smarties-17325.herokuapp.com/update-billing/${id}`, {
   //     method: "PUT",
   //     headers: {
   //       "content-type": "application/json",
@@ -46,9 +47,8 @@ const BillInfo = ({ text }) => {
   //     });
   //   event.target.reset();
   // };
-
   const handleDelete = (id) => {
-    const url = `http://localhost:5000/delete-billing/${id}`;
+    const url = `https://red-smarties-17325.herokuapp.com/delete-billing/${id}`;
     fetch(url, {
       method: "DELETE",
       headers: {
@@ -57,7 +57,11 @@ const BillInfo = ({ text }) => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log("delete successfull");
+        if (!result) {
+          setProgress(!false);
+        } else {
+          setProgress(false);
+        }
       });
   };
   refetch();
@@ -80,31 +84,35 @@ const BillInfo = ({ text }) => {
           <tbody>
             {allBill.map((bill, index) => (
               <>
-                <tr key={index}>
-                  <td>{bill._id}</td>
-                  <td>{bill.userName}</td>
-                  <td>{bill.userEmail}</td>
-                  <td>{bill.phoneNumber}</td>
-                  <td>$ {bill.amount}</td>
-                  <td>
-                    <div className="flex gap-x-2">
-                      <label
-                        for="my-modal-6"
-                        title="update"
-                        className="text-xl hover:text-green-500 cursor-pointer"
-                      >
-                        <MdOutlineUpdate />
-                      </label>
-                      <span
-                        onClick={() => handleDelete(bill._id)}
-                        title="delete"
-                        className="text-xl hover:text-red-500 cursor-pointer"
-                      >
-                        <TiDeleteOutline />
-                      </span>
-                    </div>
-                  </td>
-                </tr>
+                {progress !== false ? (
+                  <Loading />
+                ) : (
+                  <tr key={index}>
+                    <td>{bill._id}</td>
+                    <td>{bill.userName}</td>
+                    <td>{bill.userEmail}</td>
+                    <td>{bill.phoneNumber}</td>
+                    <td>$ {bill.amount}</td>
+                    <td>
+                      <div className="flex gap-x-2">
+                        <label
+                          for="my-modal-6"
+                          title="update"
+                          className="text-xl hover:text-green-500 cursor-pointer"
+                        >
+                          <MdOutlineUpdate />
+                        </label>
+                        <span
+                          onClick={() => handleDelete(bill._id)}
+                          title="delete"
+                          className="text-xl hover:text-red-500 cursor-pointer"
+                        >
+                          <TiDeleteOutline />
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                )}
               </>
             ))}
           </tbody>

@@ -8,7 +8,7 @@ const BillInfoAdd = ({ id }) => {
     handleSubmit,
   } = useForm();
   const onSubmit = (data, event) => {
-    fetch(`http://localhost:5000/update-billing/${id}`, {
+    fetch(`https://red-smarties-17325.herokuapp.com/update-billing/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

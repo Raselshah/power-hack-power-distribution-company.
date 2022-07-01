@@ -7,7 +7,7 @@ const LogIn = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data, event) => {
-    fetch(`http://localhost:5000/login/${data.email}`)
+    fetch(`https://red-smarties-17325.herokuapp.com/login/${data.email}`)
       .then((res) => res.json())
       .then((result) => {
         console.log("success");

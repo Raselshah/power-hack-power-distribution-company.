@@ -6,7 +6,7 @@ const Register = () => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const onSubmit = (data, event) => {
-    fetch("http://localhost:5000/register", {
+    fetch("https://red-smarties-17325.herokuapp.com/register", {
       method: "POST",
       headers: {
         "content-type": "application/json",
