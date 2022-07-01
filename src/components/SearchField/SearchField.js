@@ -26,24 +26,24 @@ const SearchField = () => {
   console.log(searchField);
   return (
     <>
-      <div class="navbar bg-gray-400 mt-12 w-3/4 mx-auto rounded-sm">
-        <div class="flex-none">
-          <h2 class="">Billings</h2>
+      <div className="navbar bg-gray-400 mt-12 w-3/4 mx-auto rounded-sm">
+        <div className="flex-none">
+          <h2 className="">Billings</h2>
         </div>
-        <div class="flex-1 ml-6">
-          <div class="form-control">
-            <div class="input-group">
+        <div className="flex-1 ml-6">
+          <div className="form-control">
+            <div className="input-group">
               <input
                 id="search"
                 type="text"
                 placeholder="Search…"
                 name="search"
-                class="input input-bordered"
+                className="input input-bordered"
               />
-              <button onClick={handleSearch} class="btn btn-square">
+              <button onClick={handleSearch} className="btn btn-square">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6"
+                  className="h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -59,8 +59,8 @@ const SearchField = () => {
             </div>
           </div>
         </div>
-        <div class="flex-none">
-          <label for="my-modal-6" class="btn btn-sm modal-button">
+        <div className="flex-none">
+          <label for="my-modal-6" className="btn btn-sm modal-button">
             Add New Bill
           </label>
         </div>

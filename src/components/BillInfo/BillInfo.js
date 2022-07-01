@@ -50,8 +50,8 @@ const BillInfo = ({ text }) => {
   return (
     <>
       {/* <ModalForm onSubmit={onSubmit} /> */}
-      <div class="overflow-x-auto mt-6 w-3/4 mx-auto">
-        <table class="table w-full">
+      <div className="overflow-x-auto mt-6 w-3/4 mx-auto">
+        <table className="table w-full">
           <thead>
             <tr>
               <th>Billing ID</th>
@@ -96,11 +96,11 @@ const BillInfo = ({ text }) => {
         </table>
       </div>
 
-      <div class="btn-group flex justify-center mt-4">
-        <button class="btn btn-sm">1</button>
-        <button class="btn btn-sm btn-active">2</button>
-        <button class="btn btn-sm">3</button>
-        <button class="btn btn-sm">4</button>
+      <div className="btn-group flex justify-center mt-4">
+        <button className="btn btn-sm">1</button>
+        <button className="btn btn-sm btn-active">2</button>
+        <button className="btn btn-sm">3</button>
+        <button className="btn btn-sm">4</button>
       </div>
     </>
   );

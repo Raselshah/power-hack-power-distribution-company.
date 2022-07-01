@@ -6,6 +6,7 @@ import SearchField from "./components/SearchField/SearchField";
 import { Routes, Route } from "react-router-dom";
 import BillInfo from "./components/BillInfo/BillInfo";
 import ModalForm from "./Hooks/ModalForm/ModalForm";
+import LogIn from "./components/LogIn/LogIn";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<BillInfo />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<LogIn />} />
       </Routes>
     </div>
   );
