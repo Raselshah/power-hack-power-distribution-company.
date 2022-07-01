@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { MdOutlineUpdate } from "react-icons/md";
 import { TiDeleteOutline } from "react-icons/ti";
 import { useQuery } from "react-query";
+import { toast } from "react-toastify";
 import Loading from "../../Hooks/Loading/Loading";
- 
+
 const BillInfo = ({ text }) => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
@@ -57,10 +58,16 @@ const BillInfo = ({ text }) => {
     })
       .then((res) => res.json())
       .then((result) => {
-        if (!result) {
-          setProgress(!false);
-        } else {
-          setProgress(false);
+        if (result) {
+          toast.success("Successfully delete bill", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
         }
       });
   };

@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
+import { toast } from "react-toastify";
+
 const ModalForm = () => {
   const {
     register,
@@ -18,7 +20,15 @@ const ModalForm = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log("success");
+        toast.success("Successfully add bill", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
     event.target.reset();
   };

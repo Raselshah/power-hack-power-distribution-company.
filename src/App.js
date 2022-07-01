@@ -7,6 +7,8 @@ import { Routes, Route } from "react-router-dom";
 import BillInfo from "./components/BillInfo/BillInfo";
 import ModalForm from "./Hooks/ModalForm/ModalForm";
 import LogIn from "./components/LogIn/LogIn";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LogIn />} />
       </Routes>
+      <ToastContainer />
     </div>
   );
 }
