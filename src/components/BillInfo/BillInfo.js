@@ -3,7 +3,7 @@ import { MdOutlineUpdate } from "react-icons/md";
 import { TiDeleteOutline } from "react-icons/ti";
 import { useQuery } from "react-query";
 import Loading from "../../Hooks/Loading/Loading";
-
+ 
 const BillInfo = ({ text }) => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
