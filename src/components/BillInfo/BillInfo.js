@@ -1,17 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlineUpdate } from "react-icons/md";
 import { TiDeleteOutline } from "react-icons/ti";
 import { useQuery } from "react-query";
 import Loading from "../../Hooks/Loading/Loading";
 
 const BillInfo = ({ text }) => {
+  const [pageCount, setPageCount] = useState(0);
+  const [page, setPage] = useState(0);
+  const size = 10;
+
+  useEffect(() => {
+    fetch("http://localhost:5000/bill")
+      .then((res) => res.json())
+      .then((result) => {
+        const count = result.bills;
+        const page = Math.ceil(count / 10);
+        setPageCount(page);
+      });
+  }, []);
   const {
     isLoading,
     error,
     data: allBill,
     refetch,
   } = useQuery("bill", () =>
-    fetch("http://localhost:5000/billing-list").then((res) => res.json())
+    fetch(`http://localhost:5000/billing-list?page=${page}&count=${size}`).then(
+      (res) => res.json()
+    )
   );
 
   if (isLoading) return <Loading />;
@@ -96,11 +111,19 @@ const BillInfo = ({ text }) => {
         </table>
       </div>
 
-      <div className="btn-group flex justify-center mt-4">
-        <button className="btn btn-sm">1</button>
-        <button className="btn btn-sm btn-active">2</button>
-        <button className="btn btn-sm">3</button>
-        <button className="btn btn-sm">4</button>
+      <div className="btn-group flex justify-center mt-4 gap-2">
+        {[...Array(pageCount).keys()].map((number) => (
+          <>
+            <button
+              onClick={() => setPage(number)}
+              className={
+                page === number ? "btn-primary btn btn-sm" : "btn btn-sm"
+              }
+            >
+              {number}
+            </button>
+          </>
+        ))}
       </div>
     </>
   );
